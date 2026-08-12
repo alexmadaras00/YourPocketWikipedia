@@ -135,3 +135,20 @@ certModal.addEventListener('click', (e) => {
     closeCertModal();
   }
 });
+
+// Monument Suggestion Form handling
+const suggestionForm = document.getElementById('monument-suggestion-form');
+const suggestionFormContainer = document.getElementById('suggestion-form-container');
+const suggestionSuccessContainer = document.getElementById('suggestion-success-container');
+
+if (suggestionForm) {
+  suggestionForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const monument = document.getElementById('monument-input').value;
+    if (monument) {
+      // Here we show the beautiful success checkmark message
+      suggestionFormContainer.classList.add('hidden');
+      suggestionSuccessContainer.classList.remove('hidden');
+    }
+  });
+}
