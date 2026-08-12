@@ -16,4 +16,5 @@
 window.POCKETPEDIA_CONFIG = {
   TOURS_URL: 'https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?gid=0&format=csv',
   STOPS_URL: 'https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?gid=YOUR_STOPS_GID&format=csv',
+  SUGGESTIONS_URL: 'https://script.google.com/macros/s/YOUR_APPS_SCRIPT_WEB_APP_ID/exec', // Enter your Apps Script Web App URL here
 };

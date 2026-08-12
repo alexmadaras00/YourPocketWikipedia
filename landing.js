@@ -146,9 +146,27 @@ if (suggestionForm) {
     e.preventDefault();
     const monument = document.getElementById('monument-input').value;
     if (monument) {
-      // Here we show the beautiful success checkmark message
+      // Instantly show the success checkmark for a lightning-fast responsive feel
       suggestionFormContainer.classList.add('hidden');
       suggestionSuccessContainer.classList.remove('hidden');
+
+      // Post suggestion to Google Sheets (via Apps Script Web App)
+      const config = window.POCKETPEDIA_CONFIG || {};
+      const suggestionsUrl = config.SUGGESTIONS_URL || '';
+      
+      if (suggestionsUrl) {
+        fetch(suggestionsUrl, {
+          method: 'POST',
+          mode: 'no-cors', // Crucial for static sites: prevents CORS pre-flight block from Google Script redirection
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            monument: monument,
+            timestamp: new Date().toLocaleString('ro-RO'), // local timestamp formatting
+          })
+        }).catch(err => console.warn('Google Sheet submission failed:', err));
+      }
     }
   });
 }
