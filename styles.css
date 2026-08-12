@@ -1,0 +1,400 @@
+/* ── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --bg:          #1A1A2E;
+  --surface:     #16213E;
+  --surface-alt: #0F3460;
+  --accent:      #E94560;
+  --gold:        #F5A623;
+  --text:        #FFFFFF;
+  --text-muted:  #A0AEC0;
+  --border:      #2D3748;
+  --success:     #48BB78;
+
+  --sp-xs:  4px;
+  --sp-sm:  8px;
+  --sp-md:  16px;
+  --sp-lg:  24px;
+  --sp-xl:  32px;
+  --sp-xxl: 48px;
+
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   20px;
+  --r-full: 9999px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ── Utility ────────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── Loading / Spinner ──────────────────────────────────────────────────────── */
+.screen-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--sp-md);
+  background: var(--bg);
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { margin-top: var(--sp-sm); color: var(--text-muted); font-size: 13px; }
+
+/* ── Typography helpers ─────────────────────────────────────────────────────── */
+.body-text  { font-size: 15px; line-height: 22px; color: var(--text); }
+.caption    { font-size: 13px; color: var(--text-muted); }
+.muted      { color: var(--text-muted); }
+.error-text { font-size: 15px; color: var(--accent); text-align: center; max-width: 340px; }
+
+/* ── Safe area wrapper ──────────────────────────────────────────────────────── */
+.safe-area {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.list-container {
+  padding: var(--sp-md);
+  padding-bottom: var(--sp-xxl);
+}
+
+/* ── Page Header (tours screen) ─────────────────────────────────────────────── */
+.page-header { margin-bottom: var(--sp-lg); }
+
+.brand {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+}
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-md);
+}
+
+/* ── Instagram button ───────────────────────────────────────────────────────── */
+.ig-button {
+  display: inline-block;
+  background: var(--surface-alt);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: var(--r-full);
+  border: 1px solid var(--accent);
+  transition: opacity 0.2s;
+}
+.ig-button:hover { opacity: 0.85; }
+
+/* ── Tour list ──────────────────────────────────────────────────────────────── */
+.tours-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+/* ── Tour Card ──────────────────────────────────────────────────────────────── */
+.tour-card {
+  position: relative;
+  height: 220px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--surface);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+}
+.tour-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.tour-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tour-card .card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+.tour-card .card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-md);
+}
+.card-theme {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-xs);
+}
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: var(--sp-sm);
+  line-height: 1.2;
+}
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
+.meta-pill {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 13px;
+  padding: 3px var(--sp-sm);
+  border-radius: var(--r-full);
+}
+
+/* ── Retry button ───────────────────────────────────────────────────────────── */
+.btn-retry {
+  margin-top: var(--sp-md);
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: var(--sp-sm) var(--sp-lg);
+  border-radius: var(--r-md);
+  font-size: 15px;
+  font-weight: 600;
+}
+.btn-back-link {
+  margin-top: var(--sp-md);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Hero (tour detail) ─────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+.back-button {
+  position: absolute;
+  top: var(--sp-md);
+  left: var(--sp-md);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-full);
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.back-button:hover { background: rgba(0,0,0,0.65); }
+.hero-content {
+  position: absolute;
+  bottom: var(--sp-md);
+  left: var(--sp-md);
+  right: var(--sp-md);
+}
+.theme-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-sm);
+  line-height: 1.2;
+}
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+}
+.meta-row span { font-size: 13px; color: #fff; }
+
+/* ── Tour body ──────────────────────────────────────────────────────────────── */
+.tour-body {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--sp-md);
+  padding-bottom: var(--sp-xxl);
+}
+.tour-body .ig-button {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--sp-lg);
+  margin-top: var(--sp-sm);
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: var(--sp-md);
+  margin-bottom: var(--sp-sm);
+}
+#tour-description {
+  margin-bottom: var(--sp-md);
+}
+
+/* ── Map ────────────────────────────────────────────────────────────────────── */
+.map-container {
+  width: 100%;
+  height: 240px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-bottom: var(--sp-lg);
+  background: var(--surface);
+  /* Leaflet dark tiles look great with this palette */
+}
+/* Force Leaflet attribution to not break layout */
+.leaflet-container { font-family: inherit; }
+
+/* ── Stop Cards ─────────────────────────────────────────────────────────────── */
+#stops-list { display: flex; flex-direction: column; gap: var(--sp-md); }
+
+.stop-card {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  padding: var(--sp-md);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.stop-card.active { border-color: var(--accent); }
+.stop-card:hover { border-color: var(--accent); }
+
+.stop-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-sm);
+}
+.stop-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-full);
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.stop-card.active .stop-badge { background: var(--accent); }
+.stop-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+.stop-photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  margin-bottom: var(--sp-sm);
+}
+.stop-description {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--text-muted);
+}
+
+/* ── Audio Player ───────────────────────────────────────────────────────────── */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  background: var(--surface-alt);
+  border-radius: var(--r-md);
+  padding: var(--sp-sm);
+  margin-top: var(--sp-sm);
+}
+.play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.play-btn:hover { opacity: 0.85; }
+.play-btn:disabled { opacity: 0.6; cursor: default; }
+.audio-right { flex: 1; min-width: 0; }
+.audio-label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+.progress-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--r-full);
+  transition: width 0.25s linear;
+}
+.audio-time { font-size: 11px; color: var(--text-muted); }
+
+/* ── Responsive tweaks ──────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .brand { font-size: 26px; }
+  .hero  { height: 240px; }
+  .hero-title { font-size: 22px; }
+}

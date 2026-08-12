@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Tour — Pocketpedia</title>
+  <meta name="description" content="Pocketpedia tour detail" />
+  <link rel="icon" type="image/jpeg" href="https://pocket-pedia-tours--alexandrumadar1.replit.app/images/pocketpedia-logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Leaflet map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="loading" class="screen-center">
+      <div class="spinner"></div>
+      <p class="caption loading-text">Loading tour…</p>
+    </div>
+
+    <div id="error-state" class="screen-center hidden">
+      <p class="error-text">Tour not found.</p>
+      <a href="index.html" class="btn-back-link">← Back to tours</a>
+    </div>
+
+    <div id="tour-screen" class="hidden">
+      <!-- Hero -->
+      <div class="hero" id="hero">
+        <img id="hero-img" src="" alt="" class="hero-img" />
+        <div class="hero-overlay"></div>
+        <a href="index.html" class="back-button">←</a>
+        <div class="hero-content">
+          <p class="theme-label" id="hero-theme"></p>
+          <h1 class="hero-title" id="hero-title"></h1>
+          <div class="meta-row" id="hero-meta"></div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="tour-body">
+        <p class="body-text muted" id="tour-description"></p>
+
+        <a id="ig-button" href="#" target="_blank" rel="noopener noreferrer" class="ig-button hidden">
+          📸 View this tour on Instagram
+        </a>
+
+        <h2 class="section-title">Route Map</h2>
+        <div id="map" class="map-container"></div>
+
+        <h2 class="section-title">Stops</h2>
+        <div id="stops-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.POCKETPEDIA_CONFIG = {
+      TOURS_URL: '',
+      STOPS_URL: '',
+    };
+  </script>
+  <script src="config.js" onerror="void 0"></script>
+  <script src="app.js"></script>
+</body>
+</html>

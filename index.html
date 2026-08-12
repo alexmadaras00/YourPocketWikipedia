@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>yourpocketwikipedia — The city is a puzzle.</title>
+  <meta name="description" content="yourpocketwikipedia — European tour guide and scavenger hunt creator sharing bite-sized city trivia." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="yourpocketwikipedia" />
+  <meta property="og:description" content="yourpocketwikipedia — European tour guide and scavenger hunt creator sharing bite-sized city trivia." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="yourpocketwikipedia" />
+  <meta name="twitter:description" content="yourpocketwikipedia — European tour guide and scavenger hunt creator sharing bite-sized city trivia." />
+  
+  <link rel="icon" type="image/jpeg" href="images/pocketpedia-logo.jpg" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'hsl(34 30% 95%)',
+            foreground: 'hsl(27 14% 15%)',
+            primary: {
+              DEFAULT: 'hsl(11 60% 55%)',
+              foreground: 'hsl(34 30% 95%)',
+            },
+            secondary: {
+              DEFAULT: 'hsl(148 27% 24%)',
+              foreground: 'hsl(34 30% 95%)',
+            },
+            accent: {
+              DEFAULT: 'hsl(35 83% 58%)',
+              foreground: 'hsl(27 14% 15%)',
+            },
+            muted: {
+              DEFAULT: 'hsl(34 20% 88%)',
+              foreground: 'hsl(27 14% 45%)',
+            },
+            card: {
+              DEFAULT: 'hsl(34 33% 98%)',
+              foreground: 'hsl(27 14% 15%)',
+            },
+            border: 'hsl(34 20% 88%)',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'bounce-slow': 'bounce 3s infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0) rotate(6deg)' },
+              '50%': { transform: 'translateY(-10px) rotate(4deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/css">
+    /* Extra utility styles */
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: hsl(34 30% 95%);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: hsl(11 60% 55% / 0.3);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: hsl(11 60% 55% / 0.5);
+    }
+  </style>
+</head>
+<body class="bg-background text-foreground font-sans antialiased custom-scrollbar overflow-x-hidden selection:bg-primary/20 selection:text-primary">
+
+  <!-- ── HEADER / NAVIGATION ── -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6 px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <img src="images/pocketpedia-logo.jpg" alt="Your PocketWikipedia logo" class="w-9 h-9 rounded-full object-cover shadow-sm transform group-hover:rotate-6 transition-transform duration-300 border-2 border-primary/20" />
+        <span class="font-serif font-bold text-xl text-foreground tracking-tight">Your PocketWikipedia</span>
+      </a>
+      
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest font-bold">
+        <a href="#guide" class="text-foreground/75 hover:text-primary transition-colors duration-200">The Guide</a>
+        <a href="#content" class="text-foreground/75 hover:text-primary transition-colors duration-200">Stories</a>
+        <a href="#hunts" class="text-foreground/75 hover:text-primary transition-colors duration-200">Scavenger Hunts</a>
+      </nav>
+      
+      <!-- Desktop CTA Button -->
+      <div class="hidden md:block">
+        <a href="https://www.guruwalk.com/walks/66706-timi-oara-free-tours-the-classic-tour" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/20">
+          Book a Tour
+        </a>
+      </div>
+      
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-foreground focus:outline-none" aria-label="Toggle Menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Side-Drawer Menu -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-background flex flex-col p-6 translate-y-[-100%] transition-transform duration-300 md:hidden">
+    <div class="flex justify-between items-center mb-12">
+      <div class="flex items-center gap-2.5">
+        <img src="images/pocketpedia-logo.jpg" alt="Your PocketWikipedia logo" class="w-9 h-9 rounded-full object-cover shadow-sm border-2 border-primary/20" />
+        <span class="font-serif font-bold text-xl text-foreground tracking-tight">Your PocketWikipedia</span>
+      </div>
+      <button id="close-drawer-btn" class="p-2 text-foreground focus:outline-none" aria-label="Close Menu">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+    
+    <nav class="flex flex-col gap-6 font-serif text-3xl font-bold mb-12">
+      <a href="#guide" id="drawer-link-guide" class="text-foreground hover:text-primary transition-colors duration-200">The Guide</a>
+      <a href="#content" id="drawer-link-content" class="text-foreground hover:text-primary transition-colors duration-200">Stories</a>
+      <a href="#hunts" id="drawer-link-hunts" class="text-foreground hover:text-primary transition-colors duration-200">Scavenger Hunts</a>
+    </nav>
+    
+    <div class="mt-auto flex flex-col gap-4">
+      <a href="https://www.guruwalk.com/walks/66706-timi-oara-free-tours-the-classic-tour" target="_blank" rel="noopener noreferrer" class="inline-flex h-14 items-center justify-center rounded-full bg-primary w-full font-bold text-primary-foreground hover:bg-primary/90 transition-colors text-lg">
+        Book a Tour
+      </a>
+      <a href="#contact" id="drawer-link-contact" class="inline-flex h-14 items-center justify-center rounded-full border-2 border-foreground/20 w-full font-bold text-foreground hover:bg-foreground/5 transition-colors text-lg">
+        Contact
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ── HERO SECTION ── -->
+    <section class="relative min-h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden bg-background pt-24 pb-12 px-6">
+      <!-- Decorative circles background -->
+      <div class="absolute inset-0 pointer-events-none opacity-20">
+        <div class="absolute top-[10%] right-[10%] w-64 h-64 rounded-full border border-primary/30"></div>
+        <div class="absolute bottom-[20%] left-[5%] w-96 h-96 rounded-full border border-secondary/20"></div>
+      </div>
+      
+      <!-- Content Container -->
+      <div class="max-w-3xl mx-auto text-center z-10">
+        <!-- Subtitle pill -->
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <span class="h-px w-12 bg-primary/40 block"></span>
+          <span class="font-mono text-sm tracking-widest text-primary font-bold">Your PocketWikipedia</span>
+          <span class="h-px w-12 bg-primary/40 block"></span>
+        </div>
+        
+        <!-- Big editorial headline -->
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-foreground font-bold tracking-tight leading-[1.1] mb-8">
+          The city is <br class="hidden sm:inline" />
+          <span class="text-primary italic">a puzzle.</span>
+        </h1>
+        
+        <!-- Description -->
+        <p class="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed font-sans font-medium">
+          Part storyteller, part game master. Turning European city walks into playful discovery. Don't just see the sights—solve them.
+        </p>
+        
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md sm:max-w-none mx-auto w-full">
+          <a href="https://www.guruwalk.com/walks/66706-timi-oara-free-tours-the-classic-tour" target="_blank" rel="noopener noreferrer" class="inline-flex h-14 w-full sm:w-auto px-10 items-center justify-center gap-2 rounded-full bg-primary font-bold text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-xl shadow-primary/20 text-base">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            Book a Scavenger Hunt
+          </a>
+          <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="inline-flex h-14 w-full sm:w-auto px-10 items-center justify-center gap-2 rounded-full border-2 border-primary/20 bg-transparent text-primary font-bold hover:bg-primary/5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-base">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+            Follow @pocketwikipedia
+          </a>
+        </div>
+      </div>
+      
+      <!-- Showcase map frame -->
+      <div class="mt-16 w-full max-w-5xl mx-auto relative z-0 px-2 sm:px-6">
+        <div class="aspect-[4/3] md:aspect-[16/9] w-full relative rounded-2xl md:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/50 bg-muted">
+          <img src="images/hero-map.jpg" alt="Vintage map illustration" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-40"></div>
+        </div>
+      </div>
+      
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground animate-bounce-slow">
+        <span class="font-mono text-[10px] uppercase tracking-widest font-bold">Scroll to explore</span>
+        <i data-lucide="arrow-down" class="w-4 h-4 text-primary"></i>
+      </div>
+    </section>
+
+    <!-- ── THE GUIDE SECTION ── -->
+    <section id="guide" class="py-24 px-6 bg-secondary text-secondary-foreground relative overflow-hidden">
+      <!-- Background pattern -->
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+      
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          
+          <!-- Portrait Layered Graphic -->
+          <div class="relative max-w-sm md:max-w-none mx-auto w-full">
+            <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl relative z-10 border-4 border-secondary-foreground/10 transform -rotate-2 group transition-all duration-500">
+              <img src="images/guide-portrait.jpg" alt="Your friendly tour guide" class="w-full h-full object-cover grayscale-[20%] sepia-[10%] group-hover:grayscale-0 transition-all duration-700" />
+            </div>
+            <!-- Offset orange backdrop -->
+            <div class="absolute inset-0 bg-accent rounded-2xl transform rotate-3 translate-x-4 translate-y-4 -z-10 shadow-lg"></div>
+          </div>
+          
+          <!-- Text and Credentials -->
+          <div class="space-y-8">
+            <div class="space-y-2">
+              <span class="font-mono text-accent text-sm tracking-widest uppercase font-bold">The Guide</span>
+              <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight">Not your average umbrella holder.</h2>
+            </div>
+            
+            <div class="space-y-6 text-secondary-foreground/80 font-sans text-lg leading-relaxed font-medium">
+              <p>
+                Forget the boring checklists and the droning lectures. I believe a city reveals its best secrets to those willing to play along.
+              </p>
+              <p>
+                As a licensed tour guide, tour coordinator with the 
+                <a href="https://www.turismalternativ.ro/en/" target="_blank" rel="noopener noreferrer" class="text-secondary-foreground underline decoration-accent decoration-2 underline-offset-4 hover:text-accent transition-colors font-bold">Alternative Tourism Association</a>, 
+                and Erasmus+ project writer and facilitator, my mission is to turn ordinary sightseeing into an active adventure. Every alleyway has a story, every gargoyle has a secret, and I'm here to help you uncover them.
+              </p>
+            </div>
+            
+            <!-- Credentials Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-secondary-foreground/10">
+              <!-- Clickable Licensed Guide Card -->
+              <div id="open-cert-btn" class="flex flex-col gap-3 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group">
+                <div class="w-12 h-12 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold shadow-md group-hover:bg-accent/90 transition-colors">
+                  <i data-lucide="award" class="w-6 h-6"></i>
+                </div>
+                <span class="font-serif font-bold text-xl text-secondary-foreground group-hover:text-accent transition-colors">Licensed Guide</span>
+                <span class="text-sm font-mono text-secondary-foreground/60 font-bold uppercase tracking-wider underline decoration-accent/35 decoration-2 underline-offset-4 group-hover:decoration-accent transition-all duration-200">Official Certification</span>
+              </div>
+              
+              <div class="flex flex-col gap-3">
+                <div class="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold shadow-md">
+                  <i data-lucide="map" class="w-6 h-6"></i>
+                </div>
+                <span class="font-serif font-bold text-xl text-secondary-foreground">Tour Coordinator</span>
+                <a href="https://www.turismalternativ.ro/en/" target="_blank" rel="noopener noreferrer" class="text-sm font-mono text-secondary-foreground/60 underline decoration-accent underline-offset-4 hover:text-accent transition-colors font-bold uppercase tracking-wider">Alternative Tourism Association</a>
+              </div>
+              
+              <div class="flex flex-col gap-3 sm:col-span-2 pt-2">
+                <div class="w-12 h-12 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold shadow-md">
+                  <i data-lucide="briefcase" class="w-6 h-6"></i>
+                </div>
+                <span class="font-serif font-bold text-xl text-secondary-foreground">Erasmus+ Project Writer & Facilitator</span>
+                <a href="https://erasmus-plus.ec.europa.eu/projects/search/details/2026-1-RO01-KA152-YOU-000397370" class="text-sm font-mono text-secondary-foreground/60 font-bold uppercase tracking-wider">See Approved Erasmus+ Projects</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TRIVIA / INSTAGRAM STORIES SECTION ── -->
+    <section id="content" class="py-24 px-6 bg-background relative z-10">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Header row -->
+        <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-16">
+          <div class="max-w-2xl">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="instagram" class="w-6 h-6 text-primary"></i>
+              <span class="font-mono text-primary font-bold tracking-widest uppercase text-sm">@pocketwikipedia</span>
+            </div>
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4">
+              Bite-sized trivia & hidden gems.
+            </h2>
+            <p class="text-lg md:text-xl text-muted-foreground font-sans font-medium">
+              Follow the digital field journal. I share the quirks, the weird history, and the tiny details most people walk right past.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="inline-flex h-12 px-6 items-center justify-center gap-2 rounded-full border-2 border-foreground text-foreground hover:bg-foreground hover:text-background font-bold transition-colors duration-300 text-sm tracking-wide">
+              Join the discovery
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Interactive 3-card Instagram grid plus special follow block -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-6">
+          
+          <!-- Post Card 1 -->
+          <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="group block relative rounded-3xl overflow-hidden bg-card shadow-sm hover:shadow-xl border border-border hover:border-primary/20 transition-all duration-500 hover:-translate-y-1">
+            <div class="aspect-[4/5] relative overflow-hidden bg-muted">
+              <img src="images/pocketpedia-1.jpg" alt="Old Town Hall, Now the Music Faculty" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <i data-lucide="instagram" class="w-10 h-10 text-white"></i>
+              </div>
+            </div>
+            <div class="p-6 bg-card">
+              <div class="flex items-center gap-2 text-xs font-mono text-muted-foreground mb-3 font-bold">
+                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
+                <span class="uppercase tracking-wider">Old Town Hall, Music Faculty</span>
+              </div>
+              <p class="font-sans text-foreground leading-relaxed font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                Timișoara's official altitude marker, bolted right into the wall — most people walk past it every day without noticing.
+              </p>
+            </div>
+          </a>
+          
+          <!-- Post Card 2 (offset layout) -->
+          <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="group block relative rounded-3xl overflow-hidden bg-card shadow-sm hover:shadow-xl border border-border hover:border-primary/20 transition-all duration-500 md:-translate-y-8 hover:-translate-y-9">
+            <div class="aspect-[4/5] relative overflow-hidden bg-muted">
+              <img src="images/pocketpedia-2.jpg" alt="Liberty Square Turkish Bath Outline" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <i data-lucide="instagram" class="w-10 h-10 text-white"></i>
+              </div>
+            </div>
+            <div class="p-6 bg-card">
+              <div class="flex items-center gap-2 text-xs font-mono text-muted-foreground mb-3 font-bold">
+                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
+                <span class="uppercase tracking-wider">Liberty Square</span>
+              </div>
+              <p class="font-sans text-foreground leading-relaxed font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                That outline in the pavement traces the exact footprint of a Turkish bath — the real ruins are still sleeping underneath.
+              </p>
+            </div>
+          </a>
+          
+          <!-- Post Card 3 (offset layout) -->
+          <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="group block relative rounded-3xl overflow-hidden bg-card shadow-sm hover:shadow-xl border border-border hover:border-primary/20 transition-all duration-500 md:translate-y-4 hover:translate-y-3">
+            <div class="aspect-[4/5] relative overflow-hidden bg-muted">
+              <img src="images/pocketpedia-3.jpg" alt="János Bolyai Memorial Plaque" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <i data-lucide="instagram" class="w-10 h-10 text-white"></i>
+              </div>
+            </div>
+            <div class="p-6 bg-card">
+              <div class="flex items-center gap-2 text-xs font-mono text-muted-foreground mb-3 font-bold">
+                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
+                <span class="uppercase tracking-wider">Str. Bolyai János</span>
+              </div>
+              <p class="font-sans text-foreground leading-relaxed font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                A quiet memorial plaque for mathematician János Bolyai, tucked onto a street corner most people never look twice at.
+              </p>
+            </div>
+          </a>
+          
+          <!-- Desktop Callout Box (visible only on lg screens) -->
+          <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="hidden lg:flex aspect-[4/5] rounded-3xl bg-primary text-primary-foreground p-8 flex-col justify-center items-center text-center hover:bg-primary/90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20 cursor-pointer border border-primary/10">
+            <i data-lucide="instagram" class="w-12 h-12 mb-6 opacity-80 animate-pulse"></i>
+            <h3 class="font-serif text-2xl font-bold mb-4">Want more secrets?</h3>
+            <p class="font-sans opacity-90 mb-8 leading-relaxed max-w-xs font-medium">
+              Join thousands of curious explorers on Instagram.
+            </p>
+            <span class="font-mono uppercase tracking-widest text-xs font-bold bg-white/20 py-2.5 px-6 rounded-full border border-white/10">
+              Follow Now
+            </span>
+          </a>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SCAVENGER HUNT / WAITLIST SECTION ── -->
+    <section id="hunts" class="py-24 px-6 bg-card relative border-y border-border">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          
+          <!-- Content Block -->
+          <div class="order-2 lg:order-1 space-y-10">
+            <div class="space-y-4">
+              <span class="inline-block py-1.5 px-4 rounded-full bg-primary/10 text-primary font-mono text-xs uppercase tracking-widest font-bold">
+                Coming Soon
+              </span>
+              <h2 class="font-serif text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Experience the city like a puzzle.
+              </h2>
+              <p class="text-lg text-muted-foreground font-sans leading-relaxed font-medium">
+                My new scavenger hunts drop you right into the mystery. No boring audio guides. Just you, your friends, and a trail of clues woven into the fabric of the city itself.
+              </p>
+            </div>
+            
+            <!-- Three Step Cards -->
+            <div class="space-y-8">
+              <!-- Step 1 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center text-accent shadow-sm">
+                  <i data-lucide="compass" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h3 class="font-serif text-xl font-bold text-foreground mb-1">Get your starting point</h3>
+                  <p class="text-muted-foreground font-sans leading-relaxed font-medium">Receive an enigmatic clue that leads you to the first location.</p>
+                </div>
+              </div>
+              
+              <!-- Step 2 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center text-accent shadow-sm">
+                  <i data-lucide="search" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h3 class="font-serif text-xl font-bold text-foreground mb-1">Solve the city</h3>
+                  <p class="text-muted-foreground font-sans leading-relaxed font-medium">Use architecture, statues, and hidden details to crack the puzzles.</p>
+                </div>
+              </div>
+              
+              <!-- Step 3 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center text-accent shadow-sm">
+                  <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h3 class="font-serif text-xl font-bold text-foreground mb-1">Unlock the story</h3>
+                  <p class="text-muted-foreground font-sans leading-relaxed font-medium">Every solved clue reveals a fascinating piece of local history.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Action Trigger Button -->
+            <button id="open-waitlist-btn" class="inline-flex h-14 rounded-full font-bold bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 gap-2.5 text-lg px-10 items-center justify-center shadow-xl shadow-primary/20">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+              Join the Waitlist
+            </button>
+          </div>
+          
+          <!-- Image Graphic Block with Animated Floating Badge -->
+          <div class="order-1 lg:order-2 relative max-w-sm lg:max-w-none mx-auto w-full">
+            <div class="aspect-square rounded-full overflow-hidden shadow-2xl relative z-10 border-[10px] border-background p-2.5 bg-background">
+              <div class="w-full h-full rounded-full overflow-hidden">
+                <img src="images/scavenger-hunt.jpg" alt="Scavenger hunt tools" class="w-full h-full object-cover" />
+              </div>
+            </div>
+            
+            <!-- Floating badge with animation -->
+            <div class="absolute top-10 -right-4 lg:-right-8 bg-primary text-primary-foreground p-5 rounded-2xl shadow-xl z-20 flex flex-col items-center justify-center border-4 border-background animate-float select-none">
+              <span class="font-serif font-bold text-3xl mb-0.5 leading-none">3</span>
+              <span class="font-mono text-[10px] uppercase font-bold tracking-widest text-center leading-tight">Cities</span>
+              <span class="font-mono text-[10px] uppercase font-bold tracking-widest text-center leading-tight opacity-85">Dropping Soon</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── WAITLIST SIGNUP MODAL ── -->
+  <div id="waitlist-modal" class="fixed inset-0 z-50 bg-foreground/50 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <div class="bg-card w-full max-w-md rounded-3xl p-8 border border-border shadow-2xl relative transform translate-y-4 transition-transform duration-300">
+      
+      <!-- Close button -->
+      <button id="close-modal-btn" class="absolute top-5 right-5 p-1.5 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors focus:outline-none">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <!-- Modal Header -->
+      <div class="text-center mb-6 pt-2">
+        <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-serif text-2xl font-bold text-foreground mb-2">Join the Waitlist</h3>
+        <p class="text-muted-foreground text-sm font-sans leading-relaxed font-medium">
+          Be the first to know when scavenger hunts launch in Timișoara, Brașov, and Sibiu. Get exclusive early access pricing.
+        </p>
+      </div>
+      
+      <!-- Signup Form -->
+      <form id="waitlist-form" class="space-y-4">
+        <div>
+          <label for="waitlist-email" class="block text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground mb-1.5">Email address</label>
+          <input type="email" id="waitlist-email" required placeholder="you@example.com" class="w-full h-12 rounded-xl border-2 border-border bg-background px-4 font-sans text-sm focus:border-primary focus:outline-none transition-colors" />
+        </div>
+        <button type="submit" class="w-full h-12 rounded-xl bg-primary text-primary-foreground font-bold font-sans text-sm hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all shadow-md">
+          Notify Me
+        </button>
+      </form>
+      
+      <!-- Success State (hidden initially) -->
+      <div id="waitlist-success" class="hidden text-center py-6">
+        <div class="w-12 h-12 bg-green-500/10 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+        </div>
+        <h4 class="font-serif text-xl font-bold text-foreground mb-2">You're on the list!</h4>
+        <p class="text-muted-foreground text-sm font-sans leading-relaxed font-medium">
+          Thank you! We've secured your spot. Keep an eye on your inbox for updates and sneak peeks.
+        </p>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- ── CERTIFICATE MODAL ── -->
+  <div id="cert-modal" class="fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <div class="bg-card w-full max-w-2xl rounded-3xl p-6 border border-border shadow-2xl relative transform translate-y-4 transition-transform duration-300 max-h-[90vh] flex flex-col">
+      
+      <!-- Close button -->
+      <button id="close-cert-btn" class="absolute top-5 right-5 p-1.5 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors focus:outline-none z-10">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="text-center mb-4 flex-shrink-0">
+        <h3 class="font-serif text-2xl font-bold text-foreground">Official Tour Guide License</h3>
+        <p class="text-muted-foreground text-sm font-sans font-medium mt-1">Ministry of Economy, Entrepreneurship and Tourism</p>
+      </div>
+      
+      <!-- Scrollable container for the image -->
+      <div class="overflow-y-auto custom-scrollbar flex-1 rounded-2xl border border-border bg-background p-2 flex items-center justify-center">
+        <img src="images/official-certificate.jpg" alt="Official Tour Guide License of Alexandru Andrei Mădăras" class="max-w-full h-auto object-contain rounded-xl shadow-sm" />
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- ── FOOTER SECTION ── -->
+  <footer id="contact" class="bg-foreground text-background pt-24 pb-12 px-6">
+    <div class="max-w-4xl mx-auto text-center space-y-12">
+      
+      <!-- Call to Action Title -->
+      <div class="space-y-6">
+        <h2 class="font-serif text-5xl md:text-6xl font-bold text-white leading-tight">
+          Ready to explore?
+        </h2>
+        <p class="font-sans text-lg md:text-xl text-white/70 max-w-xl mx-auto leading-relaxed font-medium">
+          Whether you want a private guided tour, or want to be the first to know when the scavenger hunts launch, drop a line.
+        </p>
+      </div>
+      
+      <!-- Button actions -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md sm:max-w-none mx-auto w-full">
+        <a href="mailto:hello@pocketpedia.eu" class="inline-flex h-14 w-full sm:w-auto px-8 items-center justify-center gap-2.5 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-lg shadow-lg border-none">
+          <i data-lucide="mail" class="w-5 h-5"></i>
+          hello@pocketpedia.eu
+        </a>
+        <a href="https://www.instagram.com/pocketwikipedia/" target="_blank" rel="noopener noreferrer" class="inline-flex h-14 w-full sm:w-auto px-8 items-center justify-center gap-2.5 rounded-full border-2 border-white/20 bg-transparent text-white hover:bg-white hover:text-foreground hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-lg">
+          <i data-lucide="instagram" class="w-5 h-5"></i>
+          @pocketwikipedia
+        </a>
+      </div>
+      
+      <!-- Bottom bar copyrights -->
+      <div class="pt-24 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/10 font-mono text-[10px] text-white/40 tracking-wider uppercase font-bold">
+        <p>© <span id="current-year"></span> yourpocketwikipedia. All rights reserved.</p>
+        
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white transition-colors duration-200">Privacy</a>
+          <a href="#" class="hover:text-white transition-colors duration-200">Terms</a>
+          <a href="#" class="hover:text-white transition-colors duration-200">Press</a>
+        </div>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- ── JAVASCRIPT LOGIC ── -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dynamically set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-background/90', 'backdrop-blur-md', 'shadow-md', 'py-4');
+        navbar.classList.remove('bg-transparent', 'py-6');
+      } else {
+        navbar.classList.add('bg-transparent', 'py-6');
+        navbar.classList.remove('bg-background/90', 'backdrop-blur-md', 'shadow-md', 'py-4');
+      }
+    });
+
+    // Mobile Drawer Navigation
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+
+    function openDrawer() {
+      mobileDrawer.classList.remove('translate-y-[-100%]');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeDrawer() {
+      mobileDrawer.classList.add('translate-y-[-100%]');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    mobileMenuBtn.addEventListener('click', openDrawer);
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+
+    // Close mobile drawer on any link click
+    ['drawer-link-guide', 'drawer-link-content', 'drawer-link-hunts', 'drawer-link-contact'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('click', closeDrawer);
+      }
+    });
+
+    // Waitlist Modal triggers
+    const openWaitlistBtn = document.getElementById('open-waitlist-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const waitlistModal = document.getElementById('waitlist-modal');
+    const waitlistForm = document.getElementById('waitlist-form');
+    const waitlistSuccess = document.getElementById('waitlist-success');
+
+    function openModal() {
+      waitlistModal.classList.remove('hidden');
+      // Force trigger reflow for smooth transitions
+      void waitlistModal.offsetWidth;
+      waitlistModal.classList.remove('opacity-0');
+      waitlistModal.classList.add('opacity-100');
+      waitlistModal.querySelector('.bg-card').classList.remove('translate-y-4');
+      waitlistModal.querySelector('.bg-card').classList.add('translate-y-0');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeModal() {
+      waitlistModal.classList.remove('opacity-100');
+      waitlistModal.classList.add('opacity-0');
+      waitlistModal.querySelector('.bg-card').classList.add('translate-y-4');
+      waitlistModal.querySelector('.bg-card').classList.remove('translate-y-0');
+      
+      setTimeout(() => {
+        waitlistModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        // Reset form states if closed
+        waitlistForm.classList.remove('hidden');
+        waitlistSuccess.classList.add('hidden');
+        waitlistForm.reset();
+      }, 300);
+    }
+
+    openWaitlistBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Close modal when clicking on the backdrop overlay
+    waitlistModal.addEventListener('click', (e) => {
+      if (e.target === waitlistModal) {
+        closeModal();
+      }
+    });
+
+    // Handle form submit
+    waitlistForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('waitlist-email').value;
+      if (email) {
+        // Here we could send the email to a backend/spreadsheet, but since this is static,
+        // we show an elegant success state!
+        waitlistForm.classList.add('hidden');
+        waitlistSuccess.classList.remove('hidden');
+      }
+    });
+
+    // Certificate Modal triggers
+    const openCertBtn = document.getElementById('open-cert-btn');
+    const closeCertBtn = document.getElementById('close-cert-btn');
+    const certModal = document.getElementById('cert-modal');
+
+    function openCertModal() {
+      certModal.classList.remove('hidden');
+      // Force trigger reflow for smooth transitions
+      void certModal.offsetWidth;
+      certModal.classList.remove('opacity-0');
+      certModal.classList.add('opacity-100');
+      certModal.querySelector('.bg-card').classList.remove('translate-y-4');
+      certModal.querySelector('.bg-card').classList.add('translate-y-0');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeCertModal() {
+      certModal.classList.remove('opacity-100');
+      certModal.classList.add('opacity-0');
+      certModal.querySelector('.bg-card').classList.add('translate-y-4');
+      certModal.querySelector('.bg-card').classList.remove('translate-y-0');
+      
+      setTimeout(() => {
+        certModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }, 300);
+    }
+
+    openCertBtn.addEventListener('click', openCertModal);
+    closeCertBtn.addEventListener('click', closeCertModal);
+
+    // Close certificate modal when clicking on the backdrop overlay
+    certModal.addEventListener('click', (e) => {
+      if (e.target === certModal) {
+        closeCertModal();
+      }
+    });
+  </script>
+</body>
+</html>
