@@ -6,5 +6,5 @@
 // Google Apps Script setup instructions below. Once deployed, paste your URL here:
 
 window.POCKETPEDIA_CONFIG = {
-  SUGGESTIONS_URL: 'https://script.google.com/macros/s/AKfycbxpScVGf-dJa94FPfwUBE3jcuU_tyOBGnYq7LDcluPV1pgs1VMHodK_MaokIvNKczaS/exec'
+  SUGGESTIONS_URL: 'https://script.google.com/macros/s/AKfycbyzXQCqY73ONuqL7rWNA-aGhCK0p9lL5AdSJ_4brx4o58VRdhGxA6yuirDYJtMO42L1/exec'
 };
