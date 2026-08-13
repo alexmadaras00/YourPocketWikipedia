@@ -1,5 +1,2 @@
-# config.js contains your private Google Sheets URLs — do not commit it
-config.js
-
 # Bob artifacts
 .bob/
