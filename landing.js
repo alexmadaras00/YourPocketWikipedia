@@ -144,27 +144,25 @@ const suggestionSuccessContainer = document.getElementById('suggestion-success-c
 if (suggestionForm) {
   suggestionForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const monument = document.getElementById('monument-input').value;
-    if (monument) {
+    const city     = document.getElementById('monument-city').value.trim();
+    const country  = document.getElementById('monument-country').value.trim();
+    const monument = document.getElementById('monument-name').value.trim();
+
+    if (city && country && monument) {
       // Instantly show the success checkmark for a lightning-fast responsive feel
       suggestionFormContainer.classList.add('hidden');
       suggestionSuccessContainer.classList.remove('hidden');
 
-      // Post suggestion to Google Sheets (via Apps Script Web App)
+      // Post all three fields to Google Sheets (via Apps Script Web App)
       const config = window.POCKETPEDIA_CONFIG || {};
       const suggestionsUrl = config.SUGGESTIONS_URL || '';
-      
+
       if (suggestionsUrl) {
         fetch(suggestionsUrl, {
           method: 'POST',
-          mode: 'no-cors', // Crucial for static sites: prevents CORS pre-flight block from Google Script redirection
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            monument: monument,
-            timestamp: new Date().toLocaleString('ro-RO'), // local timestamp formatting
-          })
+          mode: 'no-cors', // Crucial for static sites: prevents CORS pre-flight block from Google Script
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ city, country, monument })
         }).catch(err => console.warn('Google Sheet submission failed:', err));
       }
     }

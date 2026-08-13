@@ -376,17 +376,33 @@
                 Which historic site, landmark, or hidden gem should I talk about next?
               </p>
               
-              <form id="monument-suggestion-form" class="w-full space-y-3">
+              <form id="monument-suggestion-form" class="w-full space-y-2.5">
+                <div class="grid grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    id="monument-country"
+                    required
+                    placeholder="Country (e.g., Romania)"
+                    class="w-full h-10 rounded-xl bg-white/10 border border-white/10 px-3 font-sans text-xs placeholder:text-white/50 text-white focus:outline-none focus:border-white transition-colors text-center font-semibold"
+                  />
+                  <input
+                    type="text"
+                    id="monument-city"
+                    required
+                    placeholder="City (e.g., Timișoara)"
+                    class="w-full h-10 rounded-xl bg-white/10 border border-white/10 px-3 font-sans text-xs placeholder:text-white/50 text-white focus:outline-none focus:border-white transition-colors text-center font-semibold"
+                  />
+                </div>
                 <input
                   type="text"
-                  id="monument-input"
+                  id="monument-name"
                   required
-                  placeholder="e.g., Huniade Castle"
-                  class="w-full h-11 rounded-xl bg-white/15 border-2 border-white/10 px-4 font-sans text-sm placeholder:text-white/50 text-white focus:outline-none focus:border-white transition-colors text-center font-semibold"
+                  placeholder="Monument (e.g., Huniade Castle)"
+                  class="w-full h-10 rounded-xl bg-white/15 border border-white/15 px-3 font-sans text-xs placeholder:text-white/50 text-white focus:outline-none focus:border-white transition-colors text-center font-semibold"
                 />
                 <button
                   type="submit"
-                  class="w-full h-11 rounded-xl bg-white text-primary font-bold font-sans text-sm hover:bg-white/90 active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-1.5"
+                  class="w-full h-10 mt-1 rounded-xl bg-white text-primary font-bold font-sans text-sm hover:bg-white/90 active:scale-[0.99] transition-all shadow-md flex items-center justify-center gap-1.5"
                 >
                   <i data-lucide="send" class="w-4 h-4"></i>
                   Send Suggestion
