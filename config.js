@@ -1,10 +1,8 @@
 // ── Your Pocketpedia Configuration ──────────────────────────────────────────────
-// This file is in your .gitignore, meaning it stays secure on your computer and 
-// is never pushed to public GitHub repositories.
-//
-// To start receiving monument suggestions in your spreadsheet, follow the 2-minute 
-// Google Apps Script setup instructions below. Once deployed, paste your URL here:
+// This file is published on GitHub Pages to configure dynamic features safely.
 
 window.POCKETPEDIA_CONFIG = {
-  SUGGESTIONS_URL: 'https://script.google.com/macros/s/AKfycbyzXQCqY73ONuqL7rWNA-aGhCK0p9lL5AdSJ_4brx4o58VRdhGxA6yuirDYJtMO42L1/exec'
+  // Web3Forms configuration for receiving monument suggestions in your inbox!
+  SUGGESTIONS_URL: 'https://api.web3forms.com/submit',
+  WEB3FORMS_KEY: '993bb529-e434-4d49-96d8-fadff8fdce3f'
 };

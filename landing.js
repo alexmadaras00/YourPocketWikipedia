@@ -171,19 +171,22 @@ if (suggestionForm) {
       suggestionFormContainer.classList.add('hidden');
       suggestionSuccessContainer.classList.remove('hidden');
 
-      // Post all three fields to Google Sheets (via Apps Script Web App)
+      // Send suggestion via Web3Forms — delivers directly to your email inbox
       const config = window.POCKETPEDIA_CONFIG || {};
-      const suggestionsUrl = config.SUGGESTIONS_URL || '';
+      const web3key = config.WEB3FORMS_KEY || '';
 
-      if (suggestionsUrl) {
-        fetch(suggestionsUrl, {
+      if (web3key) {
+        const formData = new FormData();
+        formData.append('access_key', web3key);
+        formData.append('subject', 'New Monument Suggestion — yourpocketwikipedia');
+        formData.append('City', city);
+        formData.append('Country', country);
+        formData.append('Monument', monument);
+
+        fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          mode: 'no-cors', // Prevents browser CORS blocks
-          headers: {
-            'Content-Type': 'text/plain' // 'text/plain' is a simple header that bypasses the CORS pre-flight block
-          },
-          body: JSON.stringify({ city, country, monument })
-        }).catch(err => console.warn('Google Sheet submission failed:', err));
+          body: formData
+        }).catch(err => console.warn('Web3Forms submission failed:', err));
       }
     }
   });
