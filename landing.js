@@ -76,27 +76,35 @@ function closeModal() {
   }, 300);
 }
 
-openWaitlistBtn.addEventListener('click', openModal);
-closeModalBtn.addEventListener('click', closeModal);
+if (openWaitlistBtn) {
+  openWaitlistBtn.addEventListener('click', openModal);
+}
+if (closeModalBtn) {
+  closeModalBtn.addEventListener('click', closeModal);
+}
 
 // Close modal when clicking on the backdrop overlay
-waitlistModal.addEventListener('click', (e) => {
-  if (e.target === waitlistModal) {
-    closeModal();
-  }
-});
+if (waitlistModal) {
+  waitlistModal.addEventListener('click', (e) => {
+    if (e.target === waitlistModal) {
+      closeModal();
+    }
+  });
+}
 
 // Handle form submit
-waitlistForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = document.getElementById('waitlist-email').value;
-  if (email) {
-    // Here we could send the email to a backend/spreadsheet, but since this is static,
-    // we show an elegant success state!
-    waitlistForm.classList.add('hidden');
-    waitlistSuccess.classList.remove('hidden');
-  }
-});
+if (waitlistForm) {
+  waitlistForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('waitlist-email').value;
+    if (email) {
+      // Here we could send the email to a backend/spreadsheet, but since this is static,
+      // we show an elegant success state!
+      waitlistForm.classList.add('hidden');
+      waitlistSuccess.classList.remove('hidden');
+    }
+  });
+}
 
 // Certificate Modal triggers
 const openCertBtn = document.getElementById('open-cert-btn');
@@ -104,37 +112,47 @@ const closeCertBtn = document.getElementById('close-cert-btn');
 const certModal = document.getElementById('cert-modal');
 
 function openCertModal() {
-  certModal.classList.remove('hidden');
-  // Force trigger reflow for smooth transitions
-  void certModal.offsetWidth;
-  certModal.classList.remove('opacity-0');
-  certModal.classList.add('opacity-100');
-  certModal.querySelector('.bg-card').classList.remove('translate-y-4');
-  certModal.querySelector('.bg-card').classList.add('translate-y-0');
-  document.body.classList.add('overflow-hidden');
+  if (certModal) {
+    certModal.classList.remove('hidden');
+    // Force trigger reflow for smooth transitions
+    void certModal.offsetWidth;
+    certModal.classList.remove('opacity-0');
+    certModal.classList.add('opacity-100');
+    certModal.querySelector('.bg-card').classList.remove('translate-y-4');
+    certModal.querySelector('.bg-card').classList.add('translate-y-0');
+    document.body.classList.add('overflow-hidden');
+  }
 }
 
 function closeCertModal() {
-  certModal.classList.remove('opacity-100');
-  certModal.classList.add('opacity-0');
-  certModal.querySelector('.bg-card').classList.add('translate-y-4');
-  certModal.querySelector('.bg-card').classList.remove('translate-y-0');
-  
-  setTimeout(() => {
-    certModal.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-  }, 300);
+  if (certModal) {
+    certModal.classList.remove('opacity-100');
+    certModal.classList.add('opacity-0');
+    certModal.querySelector('.bg-card').classList.add('translate-y-4');
+    certModal.querySelector('.bg-card').classList.remove('translate-y-0');
+    
+    setTimeout(() => {
+      certModal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }, 300);
+  }
 }
 
-openCertBtn.addEventListener('click', openCertModal);
-closeCertBtn.addEventListener('click', closeCertModal);
+if (openCertBtn) {
+  openCertBtn.addEventListener('click', openCertModal);
+}
+if (closeCertBtn) {
+  closeCertBtn.addEventListener('click', closeCertModal);
+}
 
 // Close certificate modal when clicking on the backdrop overlay
-certModal.addEventListener('click', (e) => {
-  if (e.target === certModal) {
-    closeCertModal();
-  }
-});
+if (certModal) {
+  certModal.addEventListener('click', (e) => {
+    if (e.target === certModal) {
+      closeCertModal();
+    }
+  });
+}
 
 // Monument Suggestion Form handling
 const suggestionForm = document.getElementById('monument-suggestion-form');
