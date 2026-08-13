@@ -249,12 +249,13 @@
             
             <!-- Credentials Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-secondary-foreground/10">
-              <div class="flex flex-col gap-3">
-                <div class="w-12 h-12 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold shadow-md">
+              <!-- Clickable Licensed Guide Card -->
+              <div id="open-cert-btn" class="flex flex-col gap-3 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group">
+                <div class="w-12 h-12 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold shadow-md group-hover:bg-accent/90 transition-colors">
                   <i data-lucide="award" class="w-6 h-6"></i>
                 </div>
-                <span class="font-serif font-bold text-xl text-secondary-foreground">Licensed Guide</span>
-                <span class="text-sm font-mono text-secondary-foreground/60 font-bold uppercase tracking-wider" href="">Official Certification</span>
+                <span class="font-serif font-bold text-xl text-secondary-foreground group-hover:text-accent transition-colors">Licensed Guide</span>
+                <span class="text-sm font-mono text-secondary-foreground/60 underline decoration-accent underline-offset-4 hover:text-accent transition-colors font-bold uppercase tracking-wider">Official Certification</span>
               </div>
               
               <div class="flex flex-col gap-3">
@@ -270,7 +271,7 @@
                   <i data-lucide="briefcase" class="w-6 h-6"></i>
                 </div>
                 <span class="font-serif font-bold text-xl text-secondary-foreground">Erasmus+ Project Writer & Facilitator</span>
-                <a href="https://erasmus-plus.ec.europa.eu/projects/search/details/2026-1-RO01-KA152-YOU-000397370" class="text-sm font-mono text-secondary-foreground/60 font-bold uppercase tracking-wider">See Approved Erasmus+ Projects</a>
+                <a href="https://erasmus-plus.ec.europa.eu/projects/search/details/2026-1-RO01-KA152-YOU-000397370" target="_blank" rel="noopener noreferrer" class="text-sm font-mono text-secondary-foreground/60 underline decoration-accent underline-offset-4 hover:text-accent transition-colors font-bold uppercase tracking-wider">See Approved Erasmus+ Projects</a>
               </div>
             </div>
           </div>
