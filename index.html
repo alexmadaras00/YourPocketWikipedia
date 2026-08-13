@@ -555,6 +555,28 @@
     </div>
   </div>
 
+  <!-- ── CERTIFICATE MODAL ── -->
+  <div id="cert-modal" class="fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <div class="bg-card w-full max-w-2xl rounded-3xl p-6 border border-border shadow-2xl relative transform translate-y-4 transition-transform duration-300 max-h-[90vh] flex flex-col">
+      
+      <!-- Close button -->
+      <button id="close-cert-btn" class="absolute top-5 right-5 p-1.5 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors focus:outline-none z-10">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="text-center mb-4 flex-shrink-0">
+        <h3 class="font-serif text-2xl font-bold text-foreground">Official Tour Guide License</h3>
+        <p class="text-muted-foreground text-sm font-sans font-medium mt-1">Ministry of Economy, Entrepreneurship and Tourism</p>
+      </div>
+      
+      <!-- Scrollable container for the image -->
+      <div class="overflow-y-auto custom-scrollbar flex-1 rounded-2xl border border-border bg-background p-2 flex items-center justify-center">
+        <img src="images/official-certificate.jpg" alt="Official Tour Guide License of Alexandru Andrei Mădăras" class="max-w-full h-auto object-contain rounded-xl shadow-sm" />
+      </div>
+      
+    </div>
+  </div>
+
   <!-- ── FOOTER SECTION ── -->
   <footer id="contact" class="bg-foreground text-background pt-24 pb-12 px-6">
     <div class="max-w-4xl mx-auto text-center space-y-12">
