@@ -178,8 +178,10 @@ if (suggestionForm) {
       if (suggestionsUrl) {
         fetch(suggestionsUrl, {
           method: 'POST',
-          mode: 'no-cors', // Crucial for static sites: prevents CORS pre-flight block from Google Script
-          headers: { 'Content-Type': 'application/json' },
+          mode: 'no-cors', // Prevents browser CORS blocks
+          headers: {
+            'Content-Type': 'text/plain' // 'text/plain' is a simple header that bypasses the CORS pre-flight block
+          },
           body: JSON.stringify({ city, country, monument })
         }).catch(err => console.warn('Google Sheet submission failed:', err));
       }
