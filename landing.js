@@ -94,14 +94,43 @@ if (waitlistModal) {
 
 // Handle form submit
 if (waitlistForm) {
-  waitlistForm.addEventListener('submit', (e) => {
+  waitlistForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('waitlist-email').value;
-    if (email) {
-      // Here we could send the email to a backend/spreadsheet, but since this is static,
-      // we show an elegant success state!
+    const email = document.getElementById('waitlist-email').value.trim();
+    if (!email) return;
+
+    // Send the email to your inbox via Web3Forms; only show success if it really went through
+    const config = window.POCKETPEDIA_CONFIG || {};
+    const web3key = config.WEB3FORMS_KEY || '';
+    const submitBtn = waitlistForm.querySelector('button[type="submit"]');
+    const originalLabel = submitBtn ? submitBtn.textContent : '';
+
+    if (!web3key) {
+      alert('Signup is temporarily unavailable. Please email hello@pocketpedia.eu instead.');
+      return;
+    }
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+    try {
+      const formData = new FormData();
+      formData.append('access_key', web3key);
+      formData.append('subject', 'Scavenger hunt waitlist — yourpocketwikipedia');
+      formData.append('from_name', 'yourpocketwikipedia waitlist');
+      formData.append('Email', email);
+      formData.append('City interest', 'Brașov and Sibiu (homepage modal)');
+
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Request failed');
+
       waitlistForm.classList.add('hidden');
       waitlistSuccess.classList.remove('hidden');
+    } catch (err) {
+      console.warn('Waitlist submission failed:', err);
+      alert('Something went wrong. Please try again, or email hello@pocketpedia.eu.');
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
     }
   });
 }
